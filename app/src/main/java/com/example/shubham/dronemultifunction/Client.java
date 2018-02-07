@@ -45,6 +45,7 @@ public class Client extends AsyncTask<Void, Void, String> {
             socket = new Socket(dstAddress, dstPort);
 
             while(true) {
+                boolean itemAlreadyPresent = false;
                 response = "";
                 byte[] buffer = new byte[1024];
                 if(socket == null) {
@@ -67,8 +68,15 @@ public class Client extends AsyncTask<Void, Void, String> {
                 }
                 System.out.println("RESPONSE:  " + response);
                 item = new InventoryItem(response, "some data");
-                list.add(item);
-                publishProgress();
+                for(InventoryItem listItem : list) {
+                    if(listItem.getName().equals(item.getName())) {
+                        itemAlreadyPresent = true;
+                    }
+                }
+                if(!itemAlreadyPresent) {
+                    list.add(item);
+                    publishProgress();
+                }
             }
 
         } catch (UnknownHostException e) {
