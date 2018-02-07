@@ -66,7 +66,7 @@ public class Client extends AsyncTask<Void, Void, String> {
                     System.out.print(c);
                 }
                 System.out.println("RESPONSE:  " + response);
-                item = new InventoryItem("Book", response);
+                item = new InventoryItem(response, "some data");
                 list.add(item);
                 publishProgress();
             }

@@ -49,7 +49,7 @@ public class InventoryAdapter extends BaseAdapter {
         final TextView desc = convertView.findViewById(R.id.desc);
 
         name.setText(item.getName());
-        desc.setText(item.getDesc());
+        //desc.setText(item.getDesc());
         return convertView;
     }
 }
