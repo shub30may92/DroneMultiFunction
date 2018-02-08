@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,9 @@ public class InventoryFragment extends Fragment implements Client.DataChanged {
     GridView gridView;
     Client myClient;
     Button connectButton;
+    EditText etIp;
+    EditText etPort;
+    LinearLayout connectionLayout;
 
     @Nullable
     @Override
@@ -30,16 +35,22 @@ public class InventoryFragment extends Fragment implements Client.DataChanged {
         View view = inflater.inflate(R.layout.fragment_inventory_status, container, false);
         gridView = view.findViewById(R.id.gridView);
         connectButton = view.findViewById(R.id.connect);
+        etIp = view.findViewById(R.id.ip);
+        etPort = view.findViewById(R.id.port);
+        connectionLayout = view.findViewById(R.id.connectionLayout);
+
         items = new ArrayList<>();
         adapter = new InventoryAdapter(getActivity().getApplicationContext(), items);
         gridView.setAdapter(adapter);
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myClient = new Client(InventoryFragment.this, "172.16.117.125",
-                        9997,
-                        items, adapter);
-                myClient.execute();
+                if(!etIp.getText().toString().isEmpty() && !etPort.getText().toString().isEmpty()) {
+                    myClient = new Client(InventoryFragment.this, etIp.getText().toString(),
+                            Integer.valueOf(etPort.getText().toString()),
+                            items, adapter);
+                    myClient.execute();
+                }
             }
         });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,8 +67,8 @@ public class InventoryFragment extends Fragment implements Client.DataChanged {
         adapter.notifyDataSetChanged();
         gridView.invalidateViews();
         gridView.setAdapter(adapter);
-        if((connectButton.getVisibility() == View.VISIBLE) && (items.isEmpty() == false)) {
-            connectButton.setVisibility(View.GONE);
+        if((connectionLayout.getVisibility() == View.VISIBLE) && (items.isEmpty() == false)) {
+            connectionLayout.setVisibility(View.GONE);
         }
     }
 }

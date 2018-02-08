@@ -5,11 +5,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/connect"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/connectionLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="IP" />
+        <EditText
+            android:id="@+id/port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:hint="Port" />
+        <Button
+            android:id="@+id/connect"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connect" />
+
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
