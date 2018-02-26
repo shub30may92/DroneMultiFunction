@@ -36,7 +36,7 @@ public class InventoryFragment extends Fragment implements Client.DataChanged {
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myClient = new Client(InventoryFragment.this, "172.16.117.125",
+                myClient = new Client(InventoryFragment.this, "192.168.225.238",//"172.16.117.125",
                         9997,
                         items, adapter);
                 myClient.execute();

@@ -4,6 +4,8 @@ android {
     compileSdkVersion 26
     defaultConfig {
 
+        multiDexEnabled true
+
         ndk {
             abiFilters 'armeabi-v7a'
         }
@@ -21,7 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions{
+    packagingOptions {
         doNotStrip "*/*/libdjivideo.so"
         doNotStrip "*/*/libSDKRelativeJNI.so"
         doNotStrip "*/*/libFlyForbid.so"
@@ -31,17 +33,25 @@ android {
         doNotStrip "*/*/libFRCorkscrew.so"
         doNotStrip "*/*/libUpgradeVerify.so"
         doNotStrip "*/*/libFR.so"
+
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    productFlavors {
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.dji:dji-sdk:4.4.1'
+    provided 'com.dji:dji-sdk-provided:4.4.1'
+    compile 'org.mongodb:mongo-java-driver:3.4.2'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.microsoft.azure:azure-documentdb:1.15.2'
 
-    compile ('com.dji:dji-sdk:4.4.1')
-    provided ('com.dji:dji-sdk-provided:4.4.1')
+
 }

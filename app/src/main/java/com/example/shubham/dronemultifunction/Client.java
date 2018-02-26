@@ -12,6 +12,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import dbConnection.MongoClientDB;
+
 public class Client extends AsyncTask<Void, Void, String> {
 
     String dstAddress;
@@ -40,6 +42,7 @@ public class Client extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... arg0) {
 
         Socket socket = null;
+//        MongoClientDB client = MongoClientDB.getInstance();
 
         try {
             socket = new Socket(dstAddress, dstPort);
@@ -76,6 +79,7 @@ public class Client extends AsyncTask<Void, Void, String> {
                 if(!itemAlreadyPresent) {
                     list.add(item);
                     publishProgress();
+//                    client.mongoInsertData(item);
                 }
             }
 
